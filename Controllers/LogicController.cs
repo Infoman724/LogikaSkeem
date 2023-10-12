@@ -1,27 +1,23 @@
-﻿using LogikaSkeem.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using LogikaSkeem.Models; // Импорт пространства имён LogikaSkeem.Models
+using Microsoft.AspNetCore.Mvc; // Импорт пространства имён Microsoft.AspNetCore.Mvc
 
-
-[Route("api/[controller]")]
-[ApiController]
+[Route("api/[controller]")] // Указание маршрута для контроллера
+[ApiController] // Атрибут, указывающий, что контроллер является контроллером API
 public class LogicController : ControllerBase
 {
-    [HttpPost("calculate")]
+    [HttpPost("calculate")] // Обработчик HTTP POST-запроса на пути "api/logic/calculate"
     public ActionResult<string> CalculateLogic([FromBody] LogicRequest request)
     {
-        // Создайте экземпляры LogicGate и выполните операции с ними,
-        // учитывая динамические операторы и входные данные
-        // Используйте request для получения входных данных из фронтенда
+        var result = CalculateExpression(request); // Вызов метода CalculateExpression для вычисления логического выражения
 
-        var result = CalculateExpression(request);
-
-        return Ok(result);
+        return Ok(result); // Возвращаем результат в виде HTTP-ответа "Ok"
     }
 
     private bool CalculateExpression(LogicRequest request)
     {
         bool result = request.Input1; // Начальное значение результата
 
+        // Создаем списки для операторов и входных данных
         var operators = new List<string>
         {
             request.Operator1,
@@ -66,6 +62,7 @@ public class LogicController : ControllerBase
             }
         }
 
-        return result;
+        return result; // Возвращаем окончательный результат вычисления логического выражения
     }
 }
+//попробоавать добавить post/delete/pathc и т.д 
