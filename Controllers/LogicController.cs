@@ -29,6 +29,7 @@ public class LogicController : ControllerBase
 
         var inputs = new List<bool>
         {
+            request.Input1,
             request.Input2,
             request.Input3,
             request.Input4,
@@ -65,4 +66,3 @@ public class LogicController : ControllerBase
         return result; // Возвращаем окончательный результат вычисления логического выражения
     }
 }
-//попробоавать добавить post/delete/pathc и т.д 
