@@ -22,8 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
         operatorElement.addEventListener("input", updateResult);
     }
 
-    // Остальной код остается без изменений
-
     function calculateLogic() {
         const inputs = [];
         const operators = [];
@@ -33,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const operatorElement = document.getElementById(`operator${i}`);
 
             if (inputElement) {
+                // Преобразуем входные значения в логические значения
                 const inputValue = inputElement.value.toLowerCase();
                 const input = inputValue.toLowerCase() === "true" ? true : false;
                 inputs.push(input);
@@ -67,10 +66,12 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => response.json())
         .then(data => {
+            // Отображаем результат на странице
             resultDiv.textContent = `OUTPUT = ${data}`;
 
             const result = data;
 
+            // Обновляем заголовок в соответствии с результатом
             resultHeader.textContent = `Result: ${result ? "TRUE" : "FALSE"}`;
         })
         .catch(error => {
