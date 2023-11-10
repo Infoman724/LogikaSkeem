@@ -8,14 +8,17 @@ public class LogicController : ControllerBase
     [HttpPost("calculate")] // Обработчик HTTP POST-запроса на пути "api/logic/calculate"
     public ActionResult<string> CalculateLogic([FromBody] LogicRequest request)
     {
-        var result = CalculateExpression(request); // Вызов метода CalculateExpression для вычисления логического выражения
+        // Вызов метода CalculateExpression для вычисления логического выражения
+        var result = CalculateExpression(request);
 
-        return Ok(result); // Возвращаем результат в виде HTTP-ответа "Ok"
+        // Возвращаем результат в виде HTTP-ответа "Ok"
+        return Ok(result);
     }
 
     private bool CalculateExpression(LogicRequest request)
     {
-        bool result = request.Input1; // Начальное значение результата
+        // Начальное значение результата
+        bool result = request.Input1;
 
         // Создаем списки для операторов и входных данных
         var operators = new List<string>
@@ -42,9 +45,11 @@ public class LogicController : ControllerBase
         {
             if (operators.Count > i)
             {
+                // Создаем объект логического устройства в зависимости от оператора
                 if (operators[i] == "AND")
                 {
                     var andGate = new AndGate($"AND{i + 1}");
+                    // Устанавливаем входные значения и получаем результат операции
                     andGate.SetInput(result, inputs[i]);
                     result = andGate.OutputState;
                 }
@@ -57,12 +62,14 @@ public class LogicController : ControllerBase
                 else if (operators[i] == "NOT")
                 {
                     var notGate = new NotGate($"NOT{i + 1}");
+                    // Устанавливаем входные значения и получаем результат операции
                     notGate.SetInput(inputs[i], !inputs[i]);
                     result = notGate.OutputState;
                 }
             }
         }
 
-        return result; // Возвращаем окончательный результат вычисления логического выражения
+        // Возвращаем окончательный результат вычисления логического выражения
+        return result;
     }
 }
